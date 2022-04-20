@@ -29,20 +29,42 @@ generate_request_url <-
     return(img_url)
   }
 
+
 fetch_satellite_image_save_to_file <- 
   function(mapbox_request_url){
     # given a well-formed request url to mapbox, this function fetches the 
     # corresponding image and saves as a file in temporary location
-    temp_file <- paste0(tempfile(), ".jpeg")
+    temp_file <- tempfile(fileext = ".jpeg")
     download.file(mapbox_request_url, temp_file)
     return(temp_file)
   }
 
+
 fetch_image_of_coordinates_from_mapbox <- 
   function(latitude, longitude, access_token){
     # wrapper function for the two above
-    request_url <- generate_request_url(latitude, longitude, access_token)
+    request_url <- generate_request_url(
+      latitude, 
+      longitude, 
+      access_token, 
+      x_px=600, 
+      y_px=400, 
+      zoom=15
+    )
     mapbox_image_filepath <- fetch_satellite_image_save_to_file(request_url)
     return(mapbox_image_filepath)
+  }
+
+
+fetch_image_sequence_of_coordinates_from_mapbox <- 
+  function(latitude, longitude, access_token){
+    # wrapper function for the two above
+    zoom_levels <- c(14.5,15.0, 15.5)
+    mapbox_image_filepaths <- c("","","")
+    for (idx in 1:3){
+      request_url <- generate_request_url(latitude, longitude, access_token, zoom=zoom_levels[idx])
+      mapbox_image_filepaths[idx] <- fetch_satellite_image_save_to_file(request_url)
+    }
+    return(mapbox_image_filepaths)
   }
 
