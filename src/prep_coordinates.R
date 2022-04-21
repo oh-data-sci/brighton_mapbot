@@ -5,7 +5,7 @@ fetch_postcode_coordinates <- function(filepath){
   # (downloaded from: https://www.doogal.co.uk/UKPostcodes.php)
   post_code_data <- 
     read_csv(filepath) %>% 
-    select("Postcode", "Latitude", "Longitude", "Altitude")
+    select("Postcode", "Latitude", "Longitude", "Altitude", "Average Income")
 }
 
 # choose_point_coordinates <- function(post_code_data){
