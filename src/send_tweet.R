@@ -24,7 +24,8 @@ compose_tweet_text <- function(postcode, latitude, longitude, altitude){
 get_twitter_mapbot_token <- function(){
   return(
     rtweet::create_token(
-      # this uses secret keys set in my local environment specification file (~/.Renviron)
+      # this uses secret keys set in the environment specification file
+      # (e.g. ~/.Renviron, if on local machine).
       app = "brighton mapbot",
       consumer_key    = Sys.getenv("TWITTER_API_KEY"),
       consumer_secret = Sys.getenv("TWITTER_API_KEY_SECRET"),
@@ -44,7 +45,6 @@ post_mapbot_tweet <- function(random_point_tb, image_payload){
     random_point_tb$Longitude,
     random_point_tb$Altitude
   )
-  print(paste0('about to post:', tweet_text))
   rtweet::post_tweet(
     status=tweet_text,
     media=image_payload,
