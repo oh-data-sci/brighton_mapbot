@@ -44,18 +44,28 @@ twitter is more often accessed from python than it is from `R`, and consequently
 
 these seem mostly intended to fetch data from twitter (and then do some analysis on that data). most of the tutorials, instructions, and documentation focus on that use case. only the first two packages allow an `R` session to post content to twitter, which is what our bot application is meant to do. 
 
-following matt's lead, we use first of those two packages, `rtweet`. the documentation for that package recommends using twitter's oauth v1.0 support (and not v2.0). 
+following matt's lead, i use first of those two packages, `rtweet`. the documentation for that package recommends using twitter's oauth v1.0 support (and not v2.0). 
 
-that packages instructions on how to set up the access key are defunct (dead link to [here](https://rtweet.info/articles/auth.html)). nevermind, we
+that package's instructions on how to set up the access key are defunct (dead link to [here](https://rtweet.info/articles/auth.html)). you can instead follow instructions from [here](https://theusualstuff.com/generate-twitter-consumer-key-access-token/), or try to follow twitter's own documentation.
 
-first of all we need to note that though twitter offers 
-following instructions from [here](https://theusualstuff.com/generate-twitter-consumer-key-access-token/), am building a twitter bot with the intention of using github actions to run an r-script to fetch satellite images from mapbox and tweet them out. 
+1. set up a [developer twitter account](https://developer.twitter.com)
+2. go to the [developer portal](https://developer.twitter.com/en/portal/dashboard)
+3. create a [project](https://developer.twitter.com/en/docs/projects/overview), and within it, an [app](https://developer.twitter.com/en/docs/apps/overview).
+4. apply for an _elevated developer access_.
+5. you will need to generate api keys and make note of them in your environment. generate the following twitter api keys and corresponding api key secrets:
+    + `TWITTER_API_KEY`
+    + `TWITTER_API_KEY_SECRET`
+    + `TWITTER_MAPBOT_ACCESS_TOKEN`
+    + `TWITTER_MAPBOT_ACCESS_TOKEN_SECRET`
+6. you can also generate a `TWITTER_BEARER_TOKEN`, which works well for api v2.0 but i was only able to get that to work for reading tweets, not for posting tweets. your milage may vary. 
 
-the steps involved opening up a new twitter account (using seniordatascientistoh@gmail.com), as @brighton_mapbox, andt creating a new app
+as @brighton_mapbox, and creating a new app
 
 
 ## setup mapbox access
 this step is much easier. set up [instructions here] (https://docs.mapbox.com/help/getting-started/access-tokens/#how-access-tokens-work)
+    + `MAPBOX_PUBLIC_ACCESS_TOKEN`
+
 
 ## set up github actions:
-
+in your github repository, go to 'settings' . find 'secrets' on the left hand side, choose 'actions' from the sub menu.
