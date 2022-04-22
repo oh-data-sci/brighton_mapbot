@@ -2,7 +2,7 @@ name: brighton_mapbot
 
 on:
   schedule:
-    - cron '42 */6 * * *'
+    - cron '0 */6 * * *'
 
 jobs:
   brighton-mapbot-post:
@@ -21,7 +21,7 @@ jobs:
         with:
           extra-packages: rtweet
           needs: check
-      - name: install dependencies - rtweet + ancestors
+      - name: install package rtweet + dependencies
         run: Rscript -e "install.packages('rtweet', dependencies = TRUE)"
       - name: Create and post tweet
         run: Rscript bot.R

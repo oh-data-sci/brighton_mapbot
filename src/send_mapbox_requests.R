@@ -1,17 +1,17 @@
 # helper functions to communicate with mapbox:
 
 generate_request_url <-
-  function(latitude,longitude,access_token,x_px=600,y_px=400,zoom=15){
+  function(latitude,longitude,x_px=600,y_px=400,zoom=15){
     # build api request string for mapbox api call for a static satellite image
-    # centered on the given coordinates.
+    # centered on the given coordinates, fetching the api access token from 
+    # the MAPBOX_PUBLIC_ACCESS_TOKEN environmental variable.
     # latitude:  numeric (fractional degrees)
     # longitude: numeric (fractional degrees)
-    # access_token: character. from your mapbox account ,
     # x_px: number of width-wise pixels in output image
     # y_px: number of height-wise pixels in output image
     # zoom: on of 13,14,15,16,17
     base_url <- "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/"
-    img_url <- 
+    request_url <- 
       paste0(
         base_url,
         round(longitude, 4), # note the order: longitude, latitude:
@@ -24,9 +24,9 @@ generate_request_url <-
         "x",
         y_px,
         "@2x?access_token=",
-        access_token
+        Sys.getenv("MAPBOX_PUBLIC_ACCESS_TOKEN")
       )
-    return(img_url)
+    return(request_url)
   }
 
 
@@ -41,12 +41,11 @@ fetch_satellite_image_save_to_file <-
 
 
 fetch_image_of_coordinates_from_mapbox <- 
-  function(latitude, longitude, access_token){
+  function(latitude, longitude){
     # wrapper function for the two above
     request_url <- generate_request_url(
       latitude, 
       longitude, 
-      access_token, 
       x_px=600, 
       y_px=400, 
       zoom=15

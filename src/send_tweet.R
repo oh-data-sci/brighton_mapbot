@@ -50,12 +50,6 @@ post_mapbot_tweet <- function(random_point_tb, image_payload){
     media=image_payload,
     token=get_twitter_mapbot_token()
   )
-  # rtweet::post_tweet(
-  #   status=tweet_text,
-  #   media=image_payload,
-  #   token=posting_token
-  # )
-  
 }
 
 

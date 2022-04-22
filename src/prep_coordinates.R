@@ -1,11 +1,11 @@
-set.seed(1)
-
 fetch_postcode_coordinates <- function(filepath){
   # read postcode data file in csv format.
   # (downloaded from: https://www.doogal.co.uk/UKPostcodes.php)
+  # most columns are of no use to us
   post_code_data <- 
-    read_csv(filepath) %>% 
+    read_csv(filepath, guess_max=5000) %>% 
     select("Postcode", "Latitude", "Longitude", "Altitude", "Average Income")
+  return(post_code_data)
 }
 
 # choose_point_coordinates <- function(post_code_data){
@@ -32,3 +32,28 @@ fetch_postcode_coordinates <- function(filepath){
 #       )
 #   )
 # }
+
+# cols(
+#   .default = col_character(),
+#   num = col_double(),
+#   Latitude = col_double(),
+#   Longitude = col_double(),
+#   Easting = col_double(),
+#   Northing = col_double(),
+#   Introduced = col_date(format = ""),
+#   Terminated = col_date(format = ""),
+#   `National Park` = col_logical(),
+#   Population = col_double(),
+#   Households = col_double(),
+#   Altitude = col_double(),
+#   `London zone` = col_logical(),
+#   `Local authority` = col_logical(),
+#   `Index of Multiple Deprivation` = col_double(),
+#   Quality = col_double(),
+#   `User Type` = col_double(),
+#   `Last updated` = col_date(format = ""),
+#   `Distance to station` = col_double(),
+#   `Average Income` = col_double(),
+#   `Sewage Company` = col_logical()
+#   # ... with 2 more columns
+# )
