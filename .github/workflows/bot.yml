@@ -21,9 +21,11 @@ jobs:
         run: echo "about to install rtweet..."
       - name: install package rtweet + dependencies
         run: Rscript -e 'install.packages("rtweet", dependencies = TRUE, repos = "http://cran.us.r-project.org")'
+      - name: install package tidyverse + dependencies
+        run: Rscript -e 'install.packages("tidyverse", dependencies = TRUE, repos = "http://cran.us.r-project.org")'
       - name: report rtweet installation
         run: echo "...done installing rtweet"
-      - name: grab frame, compose tweet, and post to twitter tweet
+      - name: grab frame, compose tweet, and post to twitter
         run: Rscript bot.R
       - name: report completion
         run: echo "all done"
