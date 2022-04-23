@@ -18,6 +18,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: install package rtweet + dependencies
+        run: echo "about to install rtweet..."
         run: Rscript -e 'install.packages("rtweet", dependencies = TRUE, repos = "http://cran.us.r-project.org")'
+        run: echo "...done installing rtweet"
       - name: grab frame, compose tweet, and post to twitter tweet
         run: Rscript bot.R
+        run: echo "all done"
