@@ -1,14 +1,14 @@
 brighton twitter bot
 ===
 # introduction
-this is a project to build the brighton mapbot, a twitter bot (`@brighton_mapbot`) which posts a tweet every 6 hours with:
+this project builds the brighton mapbot, a twitter bot (`@brighton_mapbot`) which uses _github actions_ to post a tweet every hour with:
 
-- a randomly selected postcode within bn1 (brighton, uk).
-- a satellite photograph of that spot.
-- a link to openstreetmap showing the same patch
+- a randomly selected postcode within bn1/bn2/bn3 (brighton and hove, uk).
+- a satellite image (sourced from [mapbox.com](https://mapbox.com)) of that spot.
+- a link to [open street map](https://openstreetmap.org) of the same area.
 - altitude over sea level assigned to that postcode. 
 
-the photographs are sourced from [mapbox.com](https://mapbox.com). the bot is run as a github action.
+the images are . 
 
 please note that very little of this code is originally mine. this project is merely a copy the work of the very clever [matt dray](https://twitter.com/mattdray) from [here](https://github.com/matt-dray/londonmapbot). the talented matt presented his bot (`@londonmapbot`) with flair to the londonR meeting in february 2022 (see [here](https://www.ascent.io/london-r-february-gathering-welcometoascent-followup) for a recording well worth your time).
 
