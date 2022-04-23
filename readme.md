@@ -8,8 +8,9 @@ this project builds the brighton mapbot, a twitter bot (`@brighton_mapbot`) whic
 - a link to [open street map](https://openstreetmap.org) of the same area.
 - altitude over sea level assigned to that postcode. 
 
-
 please note that very little of this code is mine. this project is a copy the work of the very clever [matt dray](https://twitter.com/mattdray) from [here](https://github.com/matt-dray/londonmapbot), and [described here](https://www.rostrum.blog/2020/09/21/londonmapbot/). the talented matt presented his bot (`@londonmapbot`) with flair to the londonR meeting in february 2022 (see [here](https://www.ascent.io/london-r-february-gathering-welcometoascent-followup) for a recording well worth your time).
+
+![example satellite image](img/600x400@2x.jpeg)
 
 the minor differences between this effort and matt's include:
 
