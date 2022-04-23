@@ -1,5 +1,5 @@
 library(tidyverse)
-# short script to get to know the postcode file
+# short script to explore and get to know the postcode file
 source(file='src/prep_coordinates.R')
 
 # brighton and hove postcodes
