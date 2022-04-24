@@ -2,7 +2,7 @@ name: brightonmapbot
 
 on:
   schedule:
-    - cron: '19,42 * * * *'  # run twice every hour at 19/42 minutes past the hour
+    - cron: '19,42 */6 * * *'  # run twice every hour at 19/42 minutes past the hour
 
 jobs:
   brighton-mapbot-post:
