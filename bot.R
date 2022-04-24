@@ -20,7 +20,7 @@ image_filepath <-
     random_point_tb$Latitude, 
     random_point_tb$Longitude)
 
-# post as a tweet ----
+# 3. post as a tweet ----
 post_mapbot_tweet(random_point_tb, image_filepath)
 print(paste(
   Sys.Date(), Sys.time(),
