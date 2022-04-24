@@ -1,4 +1,7 @@
-library(rtweet)
+if (!require('rtweet', character.only=TRUE)) {
+  install.packages('rtweet', dependencie=TRUE)
+  library('rtweet', character.only=TRUE)
+}
 source(file="src/openstreetmap_url.R")
 
 compose_tweet_text <- function(postcode, latitude, longitude, altitude){

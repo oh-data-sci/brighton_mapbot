@@ -8,7 +8,7 @@ input_df <- data.frame(
   latitude= 50.842,
   longitude=-0.1142,
   token="test",
-  zoom=15
+  zoom=16
 )
 
 
@@ -24,7 +24,7 @@ error_report <- function(fun_name, input, output, expected){
 
 
 source("src/send_mapbox_requests.R")
-test_generate_request_url<- function(){
+test_generate_request_url<- function(input_df){
   generated <- generate_request_url(
       input_df$latitude,
       input_df$longitude,
@@ -52,7 +52,7 @@ test_get_openstreetmap_url<- function(){
 }
 
 # run tests
-test_generate_request_url()
+test_generate_request_url(input_df)
 test_get_openstreetmap_url()
 
 expect_equal(

@@ -41,14 +41,14 @@ fetch_satellite_image_save_to_file <-
 
 
 fetch_image_of_coordinates_from_mapbox <- 
-  function(latitude, longitude){
+  function(latitude, longitude, zoom_level=15.5){
     # wrapper function for the two above
     request_url <- generate_request_url(
       latitude, 
       longitude, 
       x_px=600, 
       y_px=400, 
-      zoom=15
+      zoom=zoom_level
     )
     mapbox_image_filepath <- fetch_satellite_image_save_to_file(request_url)
     return(mapbox_image_filepath)
