@@ -5,48 +5,52 @@ this project builds the brighton mapbot, a twitter bot (`@brighton_mapbot`) whic
 
 - a randomly selected postcode within bn1/bn2/bn3 (brighton and hove, uk).
 - a satellite image (sourced from [mapbox.com](https://mapbox.com)) of that spot.
-- a link to [open street map](https://openstreetmap.org) of the same area.
 - altitude over sea level assigned to that postcode. 
+- a link to [open street map](https://openstreetmap.org) of the same area.
 
-please note that very little of this code is mine. this project is a copy the work of the very clever [matt dray](https://twitter.com/mattdray) from [here](https://github.com/matt-dray/londonmapbot), and [described here](https://www.rostrum.blog/2020/09/21/londonmapbot/). the talented matt presented his bot (`@londonmapbot`) with flair to the londonR meeting in february 2022 (see [here](https://www.ascent.io/london-r-february-gathering-welcometoascent-followup) for a recording well worth your time).
+this project is a copy of `@londonmapbot` made by the very clever [matt dray](https://twitter.com/mattdray) from [here](https://github.com/matt-dray/londonmapbot), and [described here](https://www.rostrum.blog/2020/09/21/londonmapbot/). the talented matt presented his bot with flair to the _london-R_ meeting in february 2022 (see [here](https://www.ascent.io/london-r-february-gathering-welcometoascent-followup) for a recording well worth your time).
 
 ![example satellite image](img/600x400@2x.jpeg)
 
-the minor differences between this effort and matt's include:
+the minor differences between this effort and matt's work include:
 
 - matt could get away with setting a rectangular bounding box (with the latitude limits independent of the longitude limits and vice versa) delimiting central london. that doesn't work well for brighton, as many of the chosen points would land in the ocean. instead, `@londonmapbot`'s "relative in brighton" reads in a data file, downloaded from [doogal](https://www.doogal.co.uk/UKPostcodes.php), containing a list of all the postcodes within brighton and hove, along with their gps coordinates (latitude, longitude in fractional degrees), and altitude. the bot randomly selects one of these postcodes, and sends the corresponding coordinates to mapbox to get the satellite image. 
 
-- i broke up the code into little function and spread them out into little files in the `src/` folder. the `bot.R` script does very little other than calling those functions.
+- i broke up the code into multiple short functions and spread them out into  files in the `src/` folder. the `bot.R` script on the project root directory does little other than calling those functions.
 
+## next steps
+- remove dependency on `rtweet` and replace with `httr2`.  (remove the need for elevated api access).
+- clean up _github action_ specification in `bot.yml`.
+- 
 
 # instructions - concise
-- clone this repository to your system.
-- sign up for a twitter account [here](twitter.com) with developer access and _elevated api access_.
+- clone the repository.
+- sign up for a twitter account [here](twitter.com) with _developer access_ and _elevated api access_.
     + create a twitter app.
-    + generate api access key, access key secret, and bearer token for this account and store as environment variables
+    + generate an _api access key_, _access key secret_, and bearer token for this account and store as environment variables
 - sign up for an account with [mapbox.com](https://mapbox.com/), if not already established.
     + generate an api key and save in an environment variable
-- fetch a postcode data file of interest from [doogal](https://www.doogal.co.uk/UKPostcodes.php. and save in the `data/`
+- fetch a postcode data file of interest from [doogal](https://www.doogal.co.uk/UKPostcodes.php. and save in `./data/`
 - install required packages: `rtweet` `tidyverse`.
 - test run the `bot.R` file on the project root.
-- when satisfied it runs as expected, set up a _github action_ with your environment variables as _secrets_ and edit `.github/workflows/bot.yml` as required.
+- when satisfied it runs as expected, set up a _github action_ with your api key environment variables as _secrets_ and edit `.github/workflows/bot.yml` as required.
 - add, commit, and push your version of the mapbot to your account on github.com.
 
 
 # instructions - verbose
 ## set up the project
-- clone the repo to your system
+- (if needed, sign up for a github account and then) clone the repo to your system.
 - fetch a postcode data file of interest from [doogal](https://www.doogal.co.uk/UKPostcodes.php) and save in the `data/` folder (or update the `path_to_data_folder` variable in `bot.R`)
 
 ## set up access to twitter's api
-twitter is more often accessed from python than it is from `R`, and consequently there are a lot more examples and tutorials available for python than there are for `R`. nevertheless, a number of `R` packages support accessing twitter's api. i am aware of:
+twitter is more often accessed from python than it is from `R`, and consequently there are a lot more examples and tutorials available for python than there are for `R`. nevertheless, a number of `R` packages support accessing twitter's api. i am aware of four of them:
 
 - `rtweet`
 - `twitteR`
 - `streamR`
 - `RTwitterAPI`
 
-at a glance these seem mostly intended to fetch posts and other data from twitter (for doing analysis on that data). most of the tutorials and documentation focus on that use case. only the first two packages support posting content to twitter (tweetign), which is what our bot application is meant to do. 
+at a glance these seem mostly intended to fetch posts and other data from twitter (for doing analysis on that data). most of the tutorials and documentation focus on that use case. only the first two packages support posting content to twitter (tweeting), which is what this bot application is meant to do.
 
 following matt's lead, i use first of those two packages, `rtweet`, even though it has not been kept up to date with twitter's latest api changes. the documentation for that package recommends using twitter's oauth v1.0 support (and not v2.0).
 
