@@ -1,5 +1,3 @@
-# main program. loads helper functions and runs them in order.  ----
-
 # 0. load helper functions: ----
 if (!require('tidyverse', character.only=TRUE)) {
   install.packages('tidyverse', dependencie=TRUE)
@@ -22,9 +20,11 @@ image_filepath <-
 
 # 3. post as a tweet ----
 post_mapbot_tweet(random_point_tb, image_filepath)
+
+# 4. log the run
 print(paste(
   Sys.Date(), Sys.time(),
-  'posted the following tweet:',
+  'posted a tweet:',
   random_point_tb$Postcode, ":",
   paste0(
     '(',random_point_tb$Latitude,',',

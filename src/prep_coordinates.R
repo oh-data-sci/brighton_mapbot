@@ -1,30 +1,27 @@
 # brighton and hove postcodes from: https://www.doogal.co.uk/UKPostcodes.php
+# see here for column descriptions: https://www.doogal.co.uk/PostcodeCsvFields.php)
 # 'data/BN1_postcodes.csv', - brighton
 # 'data/BN2_postcodes.csv', - kemptown-marina-rottingdean
 # 'data/BN3_postcodes.csv'  - hove
 
 fetch_postcode_coordinates <- function(filepath){
   # given path to postcode data file, 
-  # (downloaded from: https://www.doogal.co.uk/UKPostcodes.php
-  # see here for column descriptions: 
-  # https://www.doogal.co.uk/PostcodeCsvFields.php)
   # read file in csv format, select columns of interest and return a tibble
-  post_code_data <- 
+  return( 
     read_csv(filepath, guess_max=5000) %>% 
     select("Postcode", "Latitude", "Longitude", "Altitude", "Average Income")
-  return(post_code_data)
+  )
 }
 
 
 get_random_postcode <- function(path_to_data_folder){
-  # given path to folder with postcode csv files, select one at random,
-  # read it into a tibble, then select a row at random.
+  # given path to folder with postcode csv files, 
+  # list all files
   filepaths <- list.files(path=path_to_data_folder, pattern=".*_postcodes.csv")
+  # select one file at random,
   filepath = paste0(path_to_data_folder, sample(filepaths, 1))
-  # read postcode data file in csv format.
-  post_code_df <- fetch_postcode_coordinates(filepath)
-  # select 1 postcode at random
-  return(dplyr::slice_sample(post_code_df, n=1))
+  # read it into a tibble, then select a row at random.
+  return(dplyr::slice_sample(fetch_postcode_coordinates(filepath), n=1))
 }
 
 
